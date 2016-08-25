@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Guia 2</title>
+        <title>Guia 3</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type='text/css' rel='stylesheet' href='css/materialize.min.css'/>
 	<link type='text/css' rel='stylesheet' href='css/icons.css'/>
@@ -36,7 +36,18 @@
         <header>
             <nav>
                 <div class="nav-wrapper light-blue darken-4">
-                  <a href="#!" class="brand-logo">DATOS PERSONALES</a>
+                    <a href="#!" class="brand-logo">Guia con JPA</a>
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                      <li><a href="index.jsp">Lugar Acceso</a></li>
+                      <li><a href="tipodocu.jsp">Tipo Docu</a></li>
+                      <li><a href="tipogafe.jsp">Tipo Gafete</a></li>
+                    </ul>
+                    <ul class="side-nav" id="mobile-demo">
+                      <li><a href="index.jsp">Lugar Acceso</a></li>
+                      <li><a href="tipodocu.jsp">Tipo Docu</a></li>
+                      <li><a href="tipogafe.jsp">Tipo Gafete</a></li>
+                    </ul>
                 </div>
             </nav>
         </header>
