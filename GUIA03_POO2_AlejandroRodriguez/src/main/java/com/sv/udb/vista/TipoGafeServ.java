@@ -5,8 +5,8 @@
  */
 package com.sv.udb.vista;
 
-import com.sv.udb.controlador.LugaAcceCtrl;
-import com.sv.udb.modelo.LugaAcce;
+import com.sv.udb.controlador.TipoGafeCtrl;
+import com.sv.udb.modelo.TipoGafe;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Laboratorio
+ * @author aleso
  */
-@WebServlet(name = "LugaAcceServ", urlPatterns = {"/LugaAcceServ"})
-public class LugaAcceServ extends HttpServlet {
+@WebServlet(name = "TipoGafeServ", urlPatterns = {"/TipoGafeServ"})
+public class TipoGafeServ extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,53 +34,52 @@ public class LugaAcceServ extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        boolean esValido = request.getMethod().equals("POST");
+       boolean esValido = request.getMethod().equals("POST");
         if(esValido)
         {
             String mens = "";
             String CRUD = request.getParameter("CursBton");
             if(CRUD.equals("Guardar"))
             {
-                LugaAcce obje = new LugaAcce();
-                obje.setNombLugaAcce(request.getParameter("nombLuga"));
+                TipoGafe obje = new TipoGafe();
+                obje.setNombTipoGafe(request.getParameter("nombTipo"));
                 obje.setFechAlta(new Date());
                 obje.setEsta(1);
-                mens = new LugaAcceCtrl().guar(obje) ? "Datos guardados exitosamente" : "Datos NO guardados";
+                mens = new TipoGafeCtrl().guar(obje) ? "Datos guardados exitosamente" : "Datos NO guardados";
             }
             else if(CRUD.equals("Consultar"))
             {
-                Long CodiLuga = Long.parseLong(request.getParameter("codiPersRadio") == null ? 
+                Long CodiTipo = Long.parseLong(request.getParameter("codiPersRadio") == null ? 
                         "0" : request.getParameter("codiPersRadio"));
-                LugaAcce objeLuga = new LugaAcceCtrl().get(CodiLuga);
+                TipoGafe objeLuga = new TipoGafeCtrl().get(CodiTipo);
                 if(objeLuga != null)
                 {
-                    request.setAttribute("CodiLuga", objeLuga.getCodiLugaAcce());
-                    request.setAttribute("nombLuga", objeLuga.getNombLugaAcce());
+                    request.setAttribute("CodiTipo", objeLuga.getCodiTipoGafe());
+                    request.setAttribute("nombTipo", objeLuga.getNombTipoGafe());
                 }
             }
             else if(CRUD.equals("Modificar"))
             {
-                LugaAcce obje = new LugaAcce();
-                obje.setNombLugaAcce(request.getParameter("nombLuga"));
+                TipoGafe obje = new TipoGafe();
+                obje.setNombTipoGafe(request.getParameter("nombTipo"));
                 obje.setEsta(1);
-                obje.setCodiLugaAcce(Long.parseLong(request.getParameter("CodiLuga")));
-                mens = new LugaAcceCtrl().modi(obje) ? "Datos modificados" : "Datos no modificados";
+                obje.setCodiTipoGafe(Long.parseLong(request.getParameter("CodiTipo")));
+                mens = new TipoGafeCtrl().modi(obje) ? "Datos modificados" : "Datos no modificados";
             }
             else if(CRUD.equals("Eliminar"))
             {
-                LugaAcce obje = new LugaAcce();
-                obje.setNombLugaAcce(request.getParameter("nombLuga"));
+                TipoGafe obje = new TipoGafe();
+                obje.setNombTipoGafe(request.getParameter("nombTipo"));
                 obje.setEsta(0);
-                obje.setCodiLugaAcce(Long.parseLong(request.getParameter("CodiLuga")));
-                mens = new LugaAcceCtrl().modi(obje) ? "Datos Eliminados" : "Datos no eliminados"; 
+                obje.setCodiTipoGafe(Long.parseLong(request.getParameter("CodiTipo")));
+                mens = new TipoGafeCtrl().modi(obje) ? "Datos Eliminados" : "Datos no eliminados"; 
             }
             request.setAttribute("mensAler", mens);
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher("/tipogafe.jsp").forward(request, response);
         }
         else
         {
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            response.sendRedirect(request.getContextPath() + "/tipogafe.jsp");
         }
     }
 
